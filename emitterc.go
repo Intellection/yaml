@@ -1023,7 +1023,7 @@ func yaml_emitter_analyze_scalar(emitter *yaml_emitter_t, value []byte) bool {
 
 		if i == 0 {
 			switch value[i] {
-			case '#', ',', '[', ']', '{', '}', '&', '*', '!', '|', '>', '\'', '"', '%', '@', '`', '$':
+			case '#', ',', '[', ']', '{', '}', '&', '*', '!', '|', '>', '\'', '"', '%', '@', '`':
 				flow_indicators = true
 				block_indicators = true
 			case '?', ':':
@@ -1035,6 +1035,10 @@ func yaml_emitter_analyze_scalar(emitter *yaml_emitter_t, value []byte) bool {
 				if followed_by_whitespace {
 					flow_indicators = true
 					block_indicators = true
+				}
+			case '$':
+				{
+					special_characters = true
 				}
 			}
 		} else {
